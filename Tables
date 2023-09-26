@@ -1,0 +1,190 @@
+Health Insurance Database	
+	-12Sep2023
+
+
+InsurancePackages
+
+insp_id				int
+insp_title			v(60)
+insp_status			c(2)
+insp_cdate			date
+
+NetworkHospitals
+This table stores network hospitals
+
+hosp_id				int
+hosp_title			v(70)
+hosp_location			v(50)
+hosp_adress			v(100)
+hosp_contactmobile		int(10)
+hosp_contactphone		int(10)
+hosp_pincode			int(6)
+hosp_luudate			date
+hosp_luuser			int
+
+Customers
+This table stores all customers(nothing but insurance policy holders)
+
+cust_id				int		PK_CUST
+cust_fname			v(50)
+cust_lname			v(50)
+cust_dob			date
+cust_address			v(255)
+cust_gender			c(1)
+cust_cdate			date
+cust_user_id			int		FK(PK_USER)
+cust_aadhar			int(12)
+cust_status			c(2)
+cust_luudate			date
+cust_luuser			int
+
+users
+This table stores users
+
+user_id				int
+user_name
+user_cdate			date
+user_pwd			v(100)
+user_type			c(4)		ADMN/CUST
+user_status			c(2)
+
+Disceases
+This table stores different covered disceases
+
+disc_id				int
+disc_name			v(100)
+disc_icdcode			v(10)
+disc_desc			v(255)
+disc_status			c(2)
+
+InsurancePackages
+This table stores insurance packages
+
+insp_id				int
+insp_title			v(60)
+insp_desc			v(255)
+insp_status			c(2)
+insp_range_start		numeric
+insp_range_end			numeric
+insp_agelimit_start		int
+insp_agelimit_end		int
+
+InsurancePackageCoverageCategories
+This table stores differenet categories that can be covered under insurance package
+
+ipcc_id				tinyint		PK_IpCC
+ipcc_title			v(60)		Room Rent/Doctor Consultation Charges/Pharmacy
+ipcc_desc			v(500)
+ipcc_status			c(2)
+
+InsurancePackageCoverageCategories
+This table stores differenet categories that are covered under insurance package
+
+insp_id				int
+ipcc_id				tinyint
+ipcc_maxlimit			numeric		//not mandatory
+
+
+InsurancePackageCoveredDisceases
+insp_id				int
+disc_id				int		CP(1,2)
+
+InsurancePolcies
+This table stores Insurance policies taken by customers
+
+iplc_id				int		PK_IPLC
+iplc_cust_id			int
+iplc_cdate			date		//created date
+iplc_sum_assured		numeric	
+iplc_applicable_date		date
+iplc_nom_insured		tinyint		//no of family members covere
+iplc_insp_id			int		FK(PK_INSP)
+iplc_yrly_prem_amount		numeric
+iplc_paymode			c(4)		YRLY/MNLY/QRTL
+iplc_expdate			date		//policy expiry date
+iplc_agnt_id			int		FK(PK_AGNT)
+
+InsurancePolicyCoverageMembers
+This table stores policy covering members
+
+iplc_id				int
+ipcm_mindex			tinyint
+ipcm_membername			v(60)
+ipcm_relation			v(60)		SELF(customer him/her self),Spouse,children,father/mother
+ipcm_dob			date
+ipcm_gender			c(1)
+ipcm_healthhistory		v(255)
+
+
+InsurancePolicySchedule
+This table stores policy schedule
+
+iplc_id				int
+iplc_sindex			smallint	//schedule index	CPK(1,2)
+iplc_date			date		
+iplc_premium			numeric
+iplc_paid_date			date		//put the date of complete payment
+
+InsurancePolicyPayments
+This table stores insurance policy payments
+
+inpp_id				int
+inpp_iplc_id			int
+inpp_trans_id			v(50)
+inpp_amount			numeric
+inpp_paymode			c(4)		CARD/NETB/DWLT/PHNP/
+
+Claims
+This table stores claims under process/applied
+
+clam_id				int		PK_CLAM
+clam_source			c(4)		INDV/HSPT
+clam_type			c(4)		DRCT/REIM
+clam_date			date
+clam_amount_requested		numeric
+clam_iplc_id			int		FK(PK_IPLC)
+clam_ipcm_mindex		tinyint		comp fk(1,2)
+clam_processed_amount		numeric
+clam_processed_Date		date
+clam_processed_by		int		FK(PK_AUSR)
+clam_remarks			v(1000)		//approved or rejected remarks
+clam_status			c(4)
+
+ClaimDetails
+This table stores details of claims
+
+clam_id				intinyint
+clad_index			tv(100)		
+clad_ipcc_id			tinyint		FK(PK_IPCC)  Pharmacy claim/Room Charges Claim 
+clad_ipcc_amount		numeric
+clad_ipcc_remarks		v(1000)
+
+
+ClaimBills
+This table stores claim bills
+
+clam_id				int
+clbl_billindex			smallint	CPK(1,2)
+clbl_document_title		v(100)
+clbl_document_path		v(255)
+clbl_claim_amount		numeric		
+clbl_processed_amount		numeric
+clbl_processed_Date		date
+clbl_processed_by		int		FK(PK_AUSR)
+clbl_remarks			v(1000)
+clbl_status			c(4)		FULL/PART/RJCT
+
+ReimbursementClaims
+This table stores reimbursement claims
+
+clam_id				int
+clam_
+
+HospitalClaims
+This table stores hospital claims
+
+clam_id				int
+hclm_hosp_id			int		FK(PK_HOSP)
+hclm_husr_id			int		FK(PK_HUSR)
+
+
