@@ -1,0 +1,16 @@
+package com.insurance.Insurance.claims.rowmappers;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+public class ReimbursementClaimsRowMapper implements RowMapper {
+
+	@Override
+	public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+		
+		return null;
+	}
+
+}
