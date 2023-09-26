@@ -1,4 +1,4 @@
-CREATE TABLE InsurancePackageCoverageCategories (
+CREATE TABLE InsurancePackageCategories (
     ipcc_id serial PRIMARY KEY,
     ipcc_title varchar(60) NOT NULL,
     ipcc_desc varchar(500),
@@ -8,8 +8,8 @@ CREATE TABLE InsurancePackageCoverageCategories (
 
 
 
--- Insert records into InsurancePackageCoverageCategories
-INSERT INTO InsurancePackageCoverageCategories (ipcc_title, ipcc_desc, ipcc_status)
+-- Insert records into InsurancePackageCategories
+INSERT INTO InsurancePackageCategories (ipcc_title, ipcc_desc, ipcc_status)
 VALUES
     ('Room Rent', 'Coverage for room rent charges', 'A'),
     ('Doctor Consultation Charges', 'Coverage for doctor consultation fees', 'A'),
@@ -24,7 +24,7 @@ VALUES
 
 
 
-CREATE TABLE InsurancePackageCoverage (
+CREATE TABLE InsurancePackageCoveragecategories (
     insp_id int,
     ipcc_id serial,
     PRIMARY KEY (insp_id, ipcc_id),
@@ -33,7 +33,7 @@ CREATE TABLE InsurancePackageCoverage (
 );
 
 -- Insert records into InsurancePackageCoverage with random insp_id and ipcc_id values
-INSERT INTO InsurancePackageCoverage (insp_id, ipcc_id)
+INSERT INTO InsurancePackageCoveragecategories (insp_id, ipcc_id)
 VALUES
     (1, 1),
     (2, 2),
